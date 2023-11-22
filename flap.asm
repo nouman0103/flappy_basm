@@ -118,13 +118,16 @@ pusha; Push all registers to stack
 mov ah,01h ; Get keyboard input
 int 16h ; Get keyboard input
 jnz moveBirdup ; If keyboard input , jump to moveBirdup
+moveBirddown:
 mov ax,[birdy] ; Move [birdy] to ax
 sub ax,1 ; Subtract 1 from [birdy]
 mov [birdy],ax ; Move ax to [birdy]
 jmp endMoveBird ; Jump to endMoveBird
 moveBirdup:
+mov ah,00h ; Get keyboard input
+int 16h ; Get keyboard input
 cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
-jne endMoveBird ; If keyboard input is not SPACE_KEY, jump to endMoveBird
+jne moveBirddown ; If keyboard input is not SPACE_KEY, jump to moveBirddown
 mov ax,[birdy] ; Move [birdy] to ax
 add ax,1 ; Add 1 to [birdy]
 mov [birdy],ax ; Move ax to [birdy]
