@@ -6,6 +6,21 @@ bird: db 12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h
 birdy: dw 30
 SPACE_KEY equ 20h
 ;====================================
+defSleep:
+pusha
+jc endSleep
+mov cx, 0Fh
+mov dx, 4240H
+mov al, 0h
+mov ah, 86h
+int 15h
+endSleep:
+popa
+ret
+
+
+
+;====================================
 defDrawSky: ; Draw a entire row of sky
 mov al,35h
 mov ah,0ch
@@ -51,7 +66,6 @@ push bp
 mov bp, sp
 pusha
 
-mov al, 2ch ; Yellow
 mov cx, 40 ; x Cordinate
 mov bx, [bp+4] ; y Cordinate
 mov dx, bx ; y Cordinate
@@ -61,9 +75,21 @@ mov bp, sp ; point bp to y Cordinate + 15
 mov bx, bird; point bx to bird
 
 
+sub dx,1
+
+mov al,35h
+mov ah,0ch
+drawTopSky:
+int 10h
+inc cx
+cmp cx,65
+jb drawTopSky
+
+mov cx, 40
+inc dx
+
 drawBird:
 mov byte al, [bx] ; Get pixel color
-mov ah, 0ch ; Draw pixel
 int 10h ; Draw pixel
 inc cx ; x Cordinate + 1
 inc bx ; point bx to next pixel
@@ -73,6 +99,13 @@ inc dx ; y Cordinate + 1
 mov cx, 40 ; x Cordinate = 40
 cmp dx, [bp] ; Check if y Cordinate is equal to y Cordinate
 jb drawBird ; If y Cordinate is less than y Cordinate + 15, draw another pixel
+
+mov al,35h
+drawBottomSky:
+int 10h
+inc cx
+cmp cx,65
+jb drawBottomSky
 
 pop bx ; Restore y Cordinate + 15
 popa 
@@ -93,17 +126,18 @@ moveBirdup:
 cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
 jne endMoveBird ; If keyboard input is not SPACE_KEY, jump to endMoveBird
 mov ax,[birdy] ; Move [birdy] to ax
-add ax,2 ; Add 2 to [birdy]
+add ax,1 ; Add 1 to [birdy]
 mov [birdy],ax ; Move ax to [birdy]
 endMoveBird:
 popa ; Pop all registers from stack
 ret ; Return to mainLoop
 ;=====================================
 mainLoop:
-call drawBackground
+
 call moveBird
 push word [birdy]
 call defDrawBird
+;call defSleep
 jmp mainLoop
 ret
 
@@ -113,7 +147,7 @@ mov ah, 0
 mov al, 13h
 int 10h
 
-
+call drawBackground
 call mainLoop
 
 
