@@ -126,7 +126,7 @@ int 16h ; Get keyboard input
 cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
 jne moveBirddown ; If keyboard input is not SPACE_KEY, jump to moveBirddown
 mov ax,[birdy] ; Move [birdy] to ax
-sub ax,1 ; Subtract 1 to [birdy]
+sub ax,4 ; Subtract 1 to [birdy]
 mov [birdy],ax ; Move ax to [birdy]
 endMoveBird:
 popa ; Pop all registers from stack
