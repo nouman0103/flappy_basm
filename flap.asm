@@ -8,13 +8,10 @@ SPACE_KEY equ 20h
 ;====================================
 defSleep:
 pusha
-jc endSleep
-mov cx, 0Fh
-mov dx, 4240H
-mov al, 0h
-mov ah, 86h
-int 15h
-endSleep:
+mov cx, 0; keep it 0
+mov dx, 0x7530 ; 30000 microseconds
+mov ah, 86h ; function 86h
+int 15h ; call interrupt 15h
 popa
 ret
 
@@ -140,7 +137,7 @@ mainLoop:
 call moveBird
 push word [birdy]
 call defDrawBird
-;call defSleep
+call defSleep
 jmp mainLoop
 ret
 
