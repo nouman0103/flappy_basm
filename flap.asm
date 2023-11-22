@@ -2,34 +2,57 @@
 
 jmp start
 
-checkCord:
-cmp cx, 320
-jb checkCord2
-mov cx, 0
-inc dx
-checkCord2:
+;checkCord:
+;cmp cx, 320
+;jb checkCord2
+;mov cx, 0
+;inc dx
+;checkCord2:
+;ret
+;--------------------------------------------
+defDrawSky: ; Draw a entire row of sky
+mov al,35h
+mov ah,0ch
+mov cx,0
+drawSky:
+int 10h
+inc cx
+cmp cx,320
+jb drawSky
 ret
-
+;---------------------------------------------------
+defDrawGround: ; Draw a entire row of ground
+mov al,06h
+mov ah,0ch
+mov cx,0
+drawGround:
+int 10h
+inc cx
+cmp cx,320
+jb drawGround
+ret
+;---------------------------------------------------------------------
 
 drawBackground:
-
-
-mov cx, 0
+pusha
 mov dx, 0
-mov al, 35h
-drawBackground2:
-mov ah, 0ch
-int 10h
-call checkCord
+skyLoop:
+call defDrawSky
+inc dx
+cmp dx, 150
+jb skyLoop
+groundLoop:
+call defDrawGround
+inc dx
 cmp dx, 200
-inc cx
-jb drawBackground2
+jb groundLoop
+popa
 ret
-
+;--------------------------------------------------------------------------
 
 mainLoop:
 call drawBackground
-jmp mainLoop
+;jmp mainLoop
 ret
 
 start:
