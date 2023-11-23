@@ -4,6 +4,7 @@ jmp start
 
 bird: db 12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,0h,0h,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,0h,0h,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,12h,12h,12h,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,2Ah,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,29h,29h,29h,29h,29h,29h,29h,29h,29h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,29h,29h,04h,04h,04h,04h,04h,12h,12h,12h,12h,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,29h,29h,29h,29h,29h,29h,29h,29h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h
 birdy: dw 30
+moveUpCounter: dw 0
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
@@ -14,8 +15,6 @@ mov ah, 86h ; function 86h
 int 15h ; call interrupt 15h
 popa
 ret
-
-
 
 ;====================================
 defDrawSky: ; Draw a entire row of sky
@@ -114,20 +113,34 @@ moveBird:
 pusha; Push all registers to stack
 mov ah,01h ; Get keyboard input
 int 16h ; Get keyboard input
-jnz moveBirdup ; If keyboard input , jump to moveBirdup
-moveBirddown:
+jz moveBirdUp
+mov ah,00h ; Get keyboard input
+int 16h ; Get keyboard input
+cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
+jne moveBirdUp ; If keyboard input is not SPACE_KEY, jump to moveBirddown
+
+mov ax, [birdy]
+mov [birdy], ax
+
+mov ax, 30
+mov [moveUpCounter], ax
+
+moveBirdUp:
+mov ax, [moveUpCounter]
+cmp ax, 0
+je moveBirdDown
+sub ax, 1
+mov [moveUpCounter], ax
+mov ax, [birdy]
+sub ax, 1
+mov [birdy], ax
+jmp endMoveBird
+moveBirdDown:
 mov ax,[birdy] ; Move [birdy] to ax
 add ax,1 ; Add 1 from [birdy]
 mov [birdy],ax ; Move ax to [birdy]
 jmp endMoveBird ; Jump to endMoveBird
-moveBirdup:
-mov ah,00h ; Get keyboard input
-int 16h ; Get keyboard input
-cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
-jne moveBirddown ; If keyboard input is not SPACE_KEY, jump to moveBirddown
-mov ax,[birdy] ; Move [birdy] to ax
-sub ax,1 ; Subtract 1 to [birdy]
-mov [birdy],ax ; Move ax to [birdy]
+
 endMoveBird:
 popa ; Pop all registers from stack
 ret ; Return to mainLoop
