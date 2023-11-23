@@ -4,12 +4,29 @@ jmp start
 
 bird: db 12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,0h,0h,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,0h,0h,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,12h,12h,12h,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,2Ah,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,29h,29h,29h,29h,29h,29h,29h,29h,29h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,29h,29h,04h,04h,04h,04h,04h,12h,12h,12h,12h,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,29h,29h,29h,29h,29h,29h,29h,29h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h
 birdy: dw 30
+velocity: dw 1
+direction: dw 0
+
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
 pusha
-mov cx, 0; keep it 0
-mov dx, 0x7530 ; 30000 microseconds
+mov dx, 0
+mov ax, [velocity]
+mov bx, 3
+div bx
+mov bx, ax
+cmp bx, 0
+jne validDividend
+mov bx, 1
+validDividend:
+mov dx, 0
+mov ax, 0xFFFF
+div bx
+mov dx, ax
+mov ax, 0
+mov bx, 0
+mov cx, 0
 mov ah, 86h ; function 86h
 int 15h ; call interrupt 15h
 popa
@@ -116,8 +133,16 @@ mov ah,01h ; Get keyboard input
 int 16h ; Get keyboard input
 jnz moveBirdup ; If keyboard input , jump to moveBirdup
 moveBirddown:
-mov ax,[birdy] ; Move [birdy] to ax
+
+mov ax,[velocity] ; Move [birdy] to ax
+cmp ax, 25 ; Check if [velocity] is equal to 10
+jae skipVelocityIncrease
 add ax,1 ; Add 1 from [birdy]
+mov [velocity],ax ; Move ax to [birdy]
+skipVelocityIncrease:
+
+mov ax,[birdy] ; Move [birdy] to ax
+add ax, 1 ; Add [velocity] to ax
 mov [birdy],ax ; Move ax to [birdy]
 jmp endMoveBird ; Jump to endMoveBird
 moveBirdup:
@@ -125,8 +150,12 @@ mov ah,00h ; Get keyboard input
 int 16h ; Get keyboard input
 cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
 jne moveBirddown ; If keyboard input is not SPACE_KEY, jump to moveBirddown
+
+mov ax, 1
+mov [velocity],ax ; Move ax to [birdy]
+
 mov ax,[birdy] ; Move [birdy] to ax
-sub ax,1 ; Subtract 1 to [birdy]
+sub ax, 1 ; Subtract [velocity] to ax
 mov [birdy],ax ; Move ax to [birdy]
 endMoveBird:
 popa ; Pop all registers from stack
