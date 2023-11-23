@@ -139,7 +139,6 @@ moveBirdDown:
 mov ax,[birdy] ; Move [birdy] to ax
 add ax,1 ; Add 1 from [birdy]
 mov [birdy],ax ; Move ax to [birdy]
-jmp endMoveBird ; Jump to endMoveBird
 
 endMoveBird:
 popa ; Pop all registers from stack
