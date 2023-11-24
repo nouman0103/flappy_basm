@@ -144,12 +144,58 @@ endMoveBird:
 popa ; Pop all registers from stack
 ret ; Return to mainLoop
 ;=====================================
+
+defDrawPipe:
+push bp
+mov bp, sp
+pusha
+
+mov cx, [bp+4] ; x Cordinate
+mov dx, 0 ; y Cordinate
+
+mov bx, cx ; x Cordinate
+add bx, 40 ; x Cordinate + 40
+
+mov al, 02h ; Color
+mov ah, 0ch ; Function
+
+drawTopPipe:
+int 10h ; Draw pixel
+inc cx ; x Cordinate + 1
+cmp cx, bx ; Check if x Cordinate is equal to x Cordinate + 40
+jb drawTopPipe ; If x Cordinate is less than x Cordinate + 40, draw another pixel
+mov cx, [bp+4] ; x Cordinate = x Cordinate
+inc dx ; y Cordinate + 1
+cmp dx, [bp+6] ; Check if y Cordinate is equal to y Cordinate + 150
+jb drawTopPipe ; If y Cordinate is less than y Cordinate + 150, draw another pixel
+
+add dx, 40 ; y Cordinate + 40
+
+drawBottomPipe: ; Draw bottom pipe
+int 10h ; Draw pixel
+inc cx ; x Cordinate + 1
+cmp cx, bx ; Check if x Cordinate is equal to x Cordinate + 40
+jb drawBottomPipe ; If x Cordinate is less than x Cordinate + 40, draw another pixel
+mov cx, [bp+4] ; x Cordinate = x Cordinate
+inc dx ; y Cordinate + 1
+cmp dx, 150 ; Check if y Cordinate is equal to 150
+jb drawBottomPipe ; If y Cordinate is less than 150, draw another pixel
+
+popa 
+pop bp
+ret 4
+
+
+;=====================================
 mainLoop:
 
 call moveBird
 push word [birdy]
 call defDrawBird
 call defSleep
+push 50 ; Height of top pipe
+push 200 ; x Cordinate of pipe
+call defDrawPipe
 jmp mainLoop
 ret
 
