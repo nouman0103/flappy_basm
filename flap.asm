@@ -121,6 +121,12 @@ pop bp
 ret 2
 
 ;=====================================
+setFallDown:
+mov word [velocityDown], 5
+mov word [velocityDownCounter], 7
+mov word [positionDownCounter], 5
+ret
+
 moveBird:
 pusha; Push all registers to stack
 mov ah,01h ; Get keyboard input
@@ -134,9 +140,7 @@ jne moveBirdUp ; If keyboard input is not SPACE_KEY, jump to moveBirddown
 mov word [velocityUp], 0
 mov word [positionUpCounter], 0
 
-mov word [velocityDown], 5
-mov word [velocityDownCounter], 7
-mov word [positionDownCounter], 5
+call setFallDown
 
 moveBirdUp:
 cmp word [velocityUp], 6
@@ -271,7 +275,8 @@ pusha
 mov dx, [birdy] ; y Cordinate
 cmp dx, 0
 ja topCollisionClear
-mov word [velocityUp], 7
+mov word [velocityUp], 6
+call setFallDown
 mov word [birdy], 1
 
 topCollisionClear:
