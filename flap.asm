@@ -155,10 +155,13 @@ mov bp, sp
 pusha
 
 mov cx, [bp+4] ; x Cordinate
+
+
 mov dx, 0 ; y Cordinate
 
 mov bx, cx ; x Cordinate
 add bx, 40 ; x Cordinate + 40
+
 
 mov al, 02h ; Color
 mov ah, 0ch ; Function
@@ -168,7 +171,7 @@ int 10h ; Draw pixel
 inc cx ; x Cordinate + 1
 cmp cx, bx ; Check if x Cordinate is equal to x Cordinate + 40
 jb drawTopPipe ; If x Cordinate is less than x Cordinate + 40, draw another pixel
-mov cx, [bp+4] ; x Cordinate = x Cordinate
+mov cx, [bp+4] ; x Cordinate = x Cordinate 
 inc dx ; y Cordinate + 1
 cmp dx, [bp+6] ; Check if y Cordinate is equal to y Cordinate + 150
 jb drawTopPipe ; If y Cordinate is less than y Cordinate + 150, draw another pixel
@@ -194,7 +197,6 @@ pusha
 mov ax, [pipesX] 
 sub ax, 1
 mov [pipesX], ax
-
 mov cx,ax ; x Cordinate
 add cx,41 ; Last x Cordinate + 41
 mov dx,0 ; y Cordinate
@@ -205,6 +207,14 @@ int 10h
 inc dx
 cmp dx,150
 jb drawLastColumnSky
+;Check if pipe is out of screen
+sub cx,41 ; Last x Cordinate
+cmp cx,0
+jne endMovePipe
+mov ax,320
+mov [pipesX],ax
+
+endMovePipe:
 popa
 ret
 ;=====================================
