@@ -3,14 +3,22 @@
 jmp start
 
 bird: db 12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,0h,0h,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,0h,0h,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,12h,12h,12h,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,2Ah,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,29h,29h,29h,29h,29h,29h,29h,29h,29h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,29h,29h,04h,04h,04h,04h,04h,12h,12h,12h,12h,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,29h,29h,29h,29h,29h,29h,29h,29h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h
+ground: db 0xEE,48h,31h,31h,31h,31h,31h,79h,2Bh,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h
+pipe: db 0xEE,0xEE,60h,49h,0xEE,0Ah,0xEE,0Ah,2Fh,60h,60h,60h,60h,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,0xEE,2Fh,2Fh,0xEE,2Fh,02h,02h,79h,79h,0xBF,0xEE,0xEE
 birdy: dw 30
 moveUpCounter: dw 0
+pipesX: dw 200
+pipesY: dw 50
+boolDrawBottomPipe: dw 0
+intBottomPipeStart: dw 0
+intPipeEndX: dw 0
+intBirdBottomY: dw 0
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
 pusha
 mov cx, 0; keep it 0
-mov dx, 0x7530 ; 30000 microseconds
+mov dx, 0x1388 ; 5000 microseconds
 mov ah, 86h ; function 86h
 int 15h ; call interrupt 15h
 popa
@@ -29,8 +37,7 @@ jb drawSky
 ret
 ;====================================
 defDrawGround: ; Draw a entire row of ground
-mov al,06h
-mov ah,0ch
+mov byte al, [bx]
 mov cx,0
 drawGround:
 int 10h
@@ -47,8 +54,10 @@ call defDrawSky
 inc dx
 cmp dx, 150
 jb skyLoop
+mov bx, ground
 groundLoop:
 call defDrawGround
+inc bx
 inc dx
 cmp dx, 200
 jb groundLoop
@@ -66,15 +75,13 @@ mov cx, 40 ; x Cordinate
 mov bx, [bp+4] ; y Cordinate
 mov dx, bx ; y Cordinate
 add bx, 15 ; y Cordinate + 15
-push bx ; Save y Cordinate + 15
-mov bp, sp ; point bp to y Cordinate + 15
+mov word [intBirdBottomY], bx ; Save y Cordinate
+
 mov bx, bird; point bx to bird
-
-
 sub dx,1
+mov ah,0ch
 
 mov al,35h
-mov ah,0ch
 drawTopSky:
 int 10h
 inc cx
@@ -93,7 +100,7 @@ cmp cx, 65 ; Check if x Cordinate is 65
 jb drawBird ; If x Cordinate is less than 65, draw another pixel
 inc dx ; y Cordinate + 1
 mov cx, 40 ; x Cordinate = 40
-cmp dx, [bp] ; Check if y Cordinate is equal to y Cordinate
+cmp dx, [intBirdBottomY] ; Check if y Cordinate is equal to y Cordinate
 jb drawBird ; If y Cordinate is less than y Cordinate + 15, draw another pixel
 
 mov al,35h
@@ -103,7 +110,6 @@ inc cx
 cmp cx,65
 jb drawBottomSky
 
-pop bx ; Restore y Cordinate + 15
 popa 
 pop bp
 ret 2
@@ -119,39 +125,114 @@ int 16h ; Get keyboard input
 cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
 jne moveBirdUp ; If keyboard input is not SPACE_KEY, jump to moveBirddown
 
-mov ax, [birdy]
-mov [birdy], ax
 
-mov ax, 30
-mov [moveUpCounter], ax
+mov word [moveUpCounter], 30
 
 moveBirdUp:
-mov ax, [moveUpCounter]
-cmp ax, 0
+cmp word [moveUpCounter], 0
 je moveBirdDown
-sub ax, 1
-mov [moveUpCounter], ax
-mov ax, [birdy]
-sub ax, 1
-mov [birdy], ax
+dec word [moveUpCounter]
+dec word [birdy]
 jmp endMoveBird
 moveBirdDown:
-mov ax,[birdy] ; Move [birdy] to ax
-add ax,1 ; Add 1 from [birdy]
-mov [birdy],ax ; Move ax to [birdy]
+inc word [birdy]
 
 endMoveBird:
 popa ; Pop all registers from stack
 ret ; Return to mainLoop
 ;=====================================
+
+defDrawPipe:
+push bp
+mov bp, sp
+pusha
+
+mov cx, [bp+4] ; x Cordinate
+mov dx, 0 ; y Cordinate
+
+
+mov ah, 0ch ; Function
+mov bx, [bp+6]
+mov word [intBottomPipeStart], bx ; Save y Cordinate
+add word [intBottomPipeStart], 40
+mov word [boolDrawBottomPipe], 0 ; boolDrawBottomPipe = 0
+mov word [intPipeEndX], cx
+add word [intPipeEndX], 40
+
+mov bx, pipe
+
+
+drawTopPipe:
+cmp dx, [bp+6] ; Check if y Cordinate is equal to y Cordinate + 150
+je drawBorder
+cmp dx, [intBottomPipeStart]
+je drawBorder
+mov byte al, [bx]
+jmp colorSelected
+drawBorder:
+mov al, 0xEE
+colorSelected:
+
+int 10h ; Draw pixel
+inc dx ; x Cordinate + 1
+cmp dx, [bp+6]
+jbe drawTopPipe
+cmp dx, [intBottomPipeStart]
+ja notSkip
+add dx, 39
+notSkip:
+cmp dx, 150
+jb drawTopPipe
+
+inc cx
+mov dx, 0
+inc bx
+cmp cx, [intPipeEndX]
+jb drawTopPipe
+
+
+endDrawPipe:
+popa 
+pop bp
+ret 4
+
+;=====================================
+movePipe:
+pusha
+dec word [pipesX]
+mov cx, [pipesX] ; x Cordinate
+add cx,41 ; Last x Cordinate + 41
+mov dx,0 ; y Cordinate
+mov al,35h
+mov ah,0ch
+drawLastColumnSky:
+int 10h
+inc dx
+cmp dx,150
+jb drawLastColumnSky
+;Check if pipe is out of screen
+sub cx,41 ; Last x Cordinate
+cmp cx,0
+jne endMovePipe
+mov word [pipesX], 320
+
+endMovePipe:
+popa
+ret
+;=====================================
 mainLoop:
 
 call moveBird
+call movePipe
 push word [birdy]
 call defDrawBird
+
+push word [pipesY] ; x Cordinate of pipe
+push word [pipesX] ; y Cordinate of pipe
+call defDrawPipe
+
 call defSleep
 jmp mainLoop
-ret
 
 start:
 
@@ -160,11 +241,7 @@ mov al, 13h
 int 10h
 
 call drawBackground
-call mainLoop
-
-
-mov ah,00
-int 16h
+jmp mainLoop
 
 mov ax, 0x4c00
 int 21h
