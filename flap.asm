@@ -261,10 +261,39 @@ endMovePipe:
 popa
 ret
 ;=====================================
+
+defCheckCollisions:
+push bp
+mov bp, sp
+pusha
+
+; check for collision with ground
+mov dx, [birdy] ; y Cordinate
+cmp dx, 0
+ja topCollisionClear
+mov word [moveUpCounter], 0
+mov word [birdy], 1
+
+topCollisionClear:
+add dx, 15
+cmp dx, 150
+jb groundCollisionClear
+mov ah,00
+int 16h
+
+groundCollisionClear:
+
+
+popa
+pop bp
+ret
+
+;=====================================
 mainLoop:
 
 call moveBird
 call movePipe
+call defCheckCollisions
 push word [birdy]
 call defDrawBird
 
