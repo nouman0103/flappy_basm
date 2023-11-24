@@ -6,12 +6,14 @@ bird: db 12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h
 ground: db 0xEE,48h,31h,31h,31h,31h,31h,79h,2Bh,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h
 pipe: db 0xEE,0xEE,60h,49h,0xEE,0Ah,0xEE,0Ah,2Fh,60h,60h,60h,60h,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,0xEE,2Fh,2Fh,0xEE,2Fh,02h,02h,79h,79h,0xBF,0xEE,0xEE
 pipeBottom: times 40 db 0xEE
-pipeCounter: dw 0
 birdy: dw 30
 moveUpCounter: dw 0
 pipesX: dw 200
 pipesY: dw 50
 boolDrawBottomPipe: dw 0
+intBottomPipeStart: dw 0
+intPipeEndX: dw 0
+intBirdBottomY: dw 0
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
@@ -74,15 +76,13 @@ mov cx, 40 ; x Cordinate
 mov bx, [bp+4] ; y Cordinate
 mov dx, bx ; y Cordinate
 add bx, 15 ; y Cordinate + 15
-push bx ; Save y Cordinate + 15
-mov bp, sp ; point bp to y Cordinate + 15
+mov word [intBirdBottomY], bx ; Save y Cordinate
+
 mov bx, bird; point bx to bird
-
-
 sub dx,1
+mov ah,0ch
 
 mov al,35h
-mov ah,0ch
 drawTopSky:
 int 10h
 inc cx
@@ -101,7 +101,7 @@ cmp cx, 65 ; Check if x Cordinate is 65
 jb drawBird ; If x Cordinate is less than 65, draw another pixel
 inc dx ; y Cordinate + 1
 mov cx, 40 ; x Cordinate = 40
-cmp dx, [bp] ; Check if y Cordinate is equal to y Cordinate
+cmp dx, [intBirdBottomY] ; Check if y Cordinate is equal to y Cordinate
 jb drawBird ; If y Cordinate is less than y Cordinate + 15, draw another pixel
 
 mov al,35h
@@ -111,7 +111,6 @@ inc cx
 cmp cx,65
 jb drawBottomSky
 
-pop bx ; Restore y Cordinate + 15
 popa 
 pop bp
 ret 2
@@ -127,26 +126,17 @@ int 16h ; Get keyboard input
 cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
 jne moveBirdUp ; If keyboard input is not SPACE_KEY, jump to moveBirddown
 
-mov ax, [birdy]
-mov [birdy], ax
 
-mov ax, 30
-mov [moveUpCounter], ax
+mov word [moveUpCounter], 30
 
 moveBirdUp:
-mov ax, [moveUpCounter]
-cmp ax, 0
+cmp word [moveUpCounter], 0
 je moveBirdDown
-sub ax, 1
-mov [moveUpCounter], ax
-mov ax, [birdy]
-sub ax, 1
-mov [birdy], ax
+dec word [moveUpCounter]
+dec word [birdy]
 jmp endMoveBird
 moveBirdDown:
-mov ax,[birdy] ; Move [birdy] to ax
-add ax,1 ; Add 1 from [birdy]
-mov [birdy],ax ; Move ax to [birdy]
+inc word [birdy]
 
 endMoveBird:
 popa ; Pop all registers from stack
@@ -159,64 +149,48 @@ mov bp, sp
 pusha
 
 mov cx, [bp+4] ; x Cordinate
-
-
 mov dx, 0 ; y Cordinate
 
-mov bx, cx ; x Cordinate
-add bx, 40 ; x Cordinate + 40
 
 mov ah, 0ch ; Function
-
+mov bx, [bp+6]
+mov word [intBottomPipeStart], bx ; Save y Cordinate
+add word [intBottomPipeStart], 40
 mov word [boolDrawBottomPipe], 0 ; boolDrawBottomPipe = 0
+mov word [intPipeEndX], cx
+add word [intPipeEndX], 40
 
-push bx
 mov bx, pipe
-mov [pipeCounter], bx
-pop bx
 
 
 drawTopPipe:
-push bx
-mov bx, [pipeCounter]
+cmp dx, [bp+6] ; Check if y Cordinate is equal to y Cordinate + 150
+je drawBorder
+cmp dx, [intBottomPipeStart]
+je drawBorder
 mov byte al, [bx]
-inc bx
-mov [pipeCounter], bx
-pop bx
+jmp colorSelected
+drawBorder:
+mov al, 0xEE
+colorSelected:
 
 int 10h ; Draw pixel
-inc cx ; x Cordinate + 1
-cmp cx, bx ; Check if x Cordinate is equal to x Cordinate + 40
-jb drawTopPipe ; If x Cordinate is less than x Cordinate + 40, draw another pixel
-mov cx, [bp+4] ; x Cordinate = x Cordinate 
-inc dx ; y Cordinate + 1
-push bx
-push cx
-mov cx, [bp+6]
-cmp word [boolDrawBottomPipe], 0
-jne setTopBorder
-sub cx, 2
-cmp dx, cx ; Check if y Cordinate is equal to y Cordinate + 150
-jae setBorder
-jmp setPipe
-setTopBorder:
-setPipe:
-mov bx, pipe
-jmp afterSet
-setBorder:
-mov bx, pipeBottom
-afterSet:
-mov [pipeCounter], bx
-pop cx
-pop bx
-cmp dx, [bp+6] ; Check if y Cordinate is equal to y Cordinate + 150
-jb drawTopPipe ; If y Cordinate is less than y Cordinate + 150, draw another pixel
-cmp word [boolDrawBottomPipe], 0 ; Check if boolDrawBottomPipe is equal to 0
-jne endDrawPipe ; If boolDrawBottomPipe is not equal to 0, jump to endDrawPipe
-mov word [boolDrawBottomPipe], 1 ; boolDrawBottomPipe = 1
-add dx, 40 ; y Cordinate + 40
-mov word [bp+6], 150
-jmp drawTopPipe
+inc dx ; x Cordinate + 1
+cmp dx, [bp+6]
+jbe drawTopPipe
+cmp dx, [intBottomPipeStart]
+ja notSkip
+add dx, 39
+notSkip:
+cmp dx, 150
+jb drawTopPipe
+
+inc cx
+mov dx, 0
+inc bx
+cmp cx, [intPipeEndX]
+jb drawTopPipe
+
 
 endDrawPipe:
 popa 
@@ -226,10 +200,8 @@ ret 4
 ;=====================================
 movePipe:
 pusha
-mov ax, [pipesX] 
-sub ax, 1
-mov [pipesX], ax
-mov cx,ax ; x Cordinate
+dec word [pipesX]
+mov cx, [pipesX] ; x Cordinate
 add cx,41 ; Last x Cordinate + 41
 mov dx,0 ; y Cordinate
 mov al,35h
@@ -243,8 +215,7 @@ jb drawLastColumnSky
 sub cx,41 ; Last x Cordinate
 cmp cx,0
 jne endMovePipe
-mov ax,320
-mov [pipesX],ax
+mov word [pipesX], 320
 
 endMovePipe:
 popa
@@ -263,7 +234,6 @@ call defDrawPipe
 
 call defSleep
 jmp mainLoop
-ret
 
 start:
 
@@ -272,11 +242,7 @@ mov al, 13h
 int 10h
 
 call drawBackground
-call mainLoop
-
-
-mov ah,00
-int 16h
+jmp mainLoop
 
 mov ax, 0x4c00
 int 21h
