@@ -16,7 +16,7 @@ SPACE_KEY equ 20h
 defSleep:
 pusha
 mov cx, 0; keep it 0
-mov dx, 0x61A8 ; 25000 microseconds
+mov dx, 0x1388 ; 5000 microseconds
 mov ah, 86h ; function 86h
 int 15h ; call interrupt 15h
 popa
@@ -240,11 +240,12 @@ call moveBird
 call movePipe
 push word [birdy]
 call defDrawBird
-call defSleep
 
 push word [pipesY] ; x Cordinate of pipe
 push word [pipesX] ; y Cordinate of pipe
 call defDrawPipe
+
+call defSleep
 jmp mainLoop
 ret
 
