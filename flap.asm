@@ -6,13 +6,19 @@ bird: db 12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h
 ground: db 0xEE,48h,31h,31h,31h,31h,31h,79h,2Bh,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h
 pipe: db 0xEE,0xEE,60h,49h,0xEE,0Ah,0xEE,0Ah,2Fh,60h,60h,60h,60h,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,0xEE,2Fh,2Fh,0xEE,2Fh,02h,02h,79h,79h,0xBF,0xEE,0xEE
 birdy: dw 30
-moveUpCounter: dw 0
 pipesX: dw 200
 pipesY: dw 50
 boolDrawBottomPipe: dw 0
 intBottomPipeStart: dw 0
 intPipeEndX: dw 0
 intBirdBottomY: dw 0
+velocityUp: dw 6
+velocityUpCounter: dw 0
+positionUpCounter: dw 2
+velocityDown: dw 5
+velocityDownCounter: dw 7
+positionDownCounter: dw 5
+
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
@@ -125,19 +131,54 @@ int 16h ; Get keyboard input
 cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
 jne moveBirdUp ; If keyboard input is not SPACE_KEY, jump to moveBirddown
 
+mov word [velocityUp], 0
+mov word [positionUpCounter], 0
 
-mov word [moveUpCounter], 30
+mov word [velocityDown], 5
+mov word [velocityDownCounter], 7
+mov word [positionDownCounter], 5
 
 moveBirdUp:
-cmp word [moveUpCounter], 0
+cmp word [velocityUp], 6
 je moveBirdDown
-dec word [moveUpCounter]
+cmp word [positionUpCounter], 2
+ja skipMoveUp
 dec word [birdy]
+mov bx, [velocityUp]
+inc bx
+mov [positionUpCounter], bx
+skipMoveUp:
+cmp word [velocityUpCounter], 0
+jne endUpMove
+inc word [velocityUp]
+mov word [velocityUpCounter], 7
+endUpMove:
+dec word [positionUpCounter]
+dec word [velocityUpCounter]
 jmp endMoveBird
+
 moveBirdDown:
+cmp word [positionDownCounter], 0
+jne skipMoveDown
 inc word [birdy]
+mov bx, [velocityDown]
+mov [positionDownCounter], bx
+
+skipMoveDown:
+cmp word [velocityDown], 0
+je endMoveBird
+cmp word [velocityDownCounter], 0
+jne endDownMove
+dec word [velocityDown]
+mov word [velocityDownCounter], 7
+endDownMove:
+dec word [velocityDownCounter]
+dec word [positionDownCounter]
+
+
 
 endMoveBird:
+
 popa ; Pop all registers from stack
 ret ; Return to mainLoop
 ;=====================================
@@ -231,7 +272,7 @@ push word [pipesY] ; x Cordinate of pipe
 push word [pipesX] ; y Cordinate of pipe
 call defDrawPipe
 
-call defSleep
+;call defSleep
 jmp mainLoop
 
 start:
