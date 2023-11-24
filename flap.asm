@@ -4,16 +4,19 @@ jmp start
 
 bird: db 12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,0h,0h,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,0h,0h,5Ch,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,5Ch,5Ch,5Ch,5Ch,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,12h,12h,12h,12h,12h,12h,5Ch,5Ch,5Ch,5Ch,5Ch,12h,12h,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,2Ah,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,12h,29h,29h,29h,29h,29h,29h,29h,29h,29h,12h,12h,2Ah,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ch,2Ah,12h,29h,29h,04h,04h,04h,04h,04h,12h,12h,12h,12h,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,2Ah,12h,12h,29h,29h,29h,29h,29h,29h,29h,29h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h
 ground: db 0xEE,48h,31h,31h,31h,31h,31h,79h,2Bh,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h
+pipe: db 0xEE,60h,49h,49h,0Ah,0Ah,0Ah,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,02h,02h,79h,79h,0xBF,0xEE
+pipeCounter: dw 0
 birdy: dw 30
 moveUpCounter: dw 0
 pipesX: dw 200
 pipesY: dw 50
+boolDrawBottomPipe: dw 0
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
 pusha
 mov cx, 0; keep it 0
-mov dx, 0x7530 ; 30000 microseconds
+mov dx, 0x61A8 ; 25000 microseconds
 mov ah, 86h ; function 86h
 int 15h ; call interrupt 15h
 popa
@@ -160,34 +163,48 @@ mov dx, 0 ; y Cordinate
 mov bx, cx ; x Cordinate
 add bx, 40 ; x Cordinate + 40
 
-mov al, 02h ; Color
 mov ah, 0ch ; Function
 
+mov word [boolDrawBottomPipe], 0 ; boolDrawBottomPipe = 0
+
+push bx
+mov bx, pipe
+mov [pipeCounter], bx
+pop bx
+
+
 drawTopPipe:
+push bx
+mov bx, [pipeCounter]
+mov byte al, [bx]
+inc bx
+mov [pipeCounter], bx
+pop bx
+
 int 10h ; Draw pixel
 inc cx ; x Cordinate + 1
 cmp cx, bx ; Check if x Cordinate is equal to x Cordinate + 40
 jb drawTopPipe ; If x Cordinate is less than x Cordinate + 40, draw another pixel
 mov cx, [bp+4] ; x Cordinate = x Cordinate
 inc dx ; y Cordinate + 1
+push bx
+mov bx, pipe
+mov [pipeCounter], bx
+pop bx
 cmp dx, [bp+6] ; Check if y Cordinate is equal to y Cordinate + 150
 jb drawTopPipe ; If y Cordinate is less than y Cordinate + 150, draw another pixel
-
+cmp word [boolDrawBottomPipe], 0 ; Check if boolDrawBottomPipe is equal to 0
+jne endDrawPipe ; If boolDrawBottomPipe is not equal to 0, jump to endDrawPipe
+mov word [boolDrawBottomPipe], 1 ; boolDrawBottomPipe = 1
 add dx, 40 ; y Cordinate + 40
+mov word [bp+6], 150
+jmp drawTopPipe
 
-drawBottomPipe: ; Draw bottom pipe
-int 10h ; Draw pixel
-inc cx ; x Cordinate + 1
-cmp cx, bx ; Check if x Cordinate is equal to x Cordinate + 40
-jb drawBottomPipe ; If x Cordinate is less than x Cordinate + 40, draw another pixel
-mov cx, [bp+4] ; x Cordinate = x Cordinate
-inc dx ; y Cordinate + 1
-cmp dx, 150 ; Check if y Cordinate is equal to 150
-jb drawBottomPipe ; If y Cordinate is less than 150, draw another pixel
-
+endDrawPipe:
 popa 
 pop bp
 ret 4
+
 ;=====================================
 movePipe:
 pusha
