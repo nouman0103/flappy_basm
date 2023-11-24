@@ -271,7 +271,7 @@ pusha
 mov dx, [birdy] ; y Cordinate
 cmp dx, 0
 ja topCollisionClear
-mov word [moveUpCounter], 0
+mov word [velocityUp], 7
 mov word [birdy], 1
 
 topCollisionClear:
