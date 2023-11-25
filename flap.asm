@@ -277,6 +277,8 @@ sub cx,41 ; Last x Cordinate
 cmp cx,0
 jne endMovePipe
 mov word [bx], 320
+push word [bp+6] ; Ref to Address of pipesY
+call generateRandomNumber
 
 endMovePipe:
 popa
@@ -312,15 +314,31 @@ pop bp
 ret
 
 ;=====================================
-;generateRandomNumber:
-;pusha
+generateRandomNumber:
+push bp ; Push bp to stack
+mov bp, sp ; Move sp to bp
+pusha ; Push all registers to stack
+mov ah,0 ; Function 0
+int 1ah ; Get system time
+mov ax,dx ; Move dx to ax
+mov bx,60 ; Move 60 to bx
+mov dx,0 ; Move 0 to dx
+div bx ; Divide ax by bx
+mov bx, [bp+4] ; Move address of variable to bx
+mov word [bx], dx ; Move dx to variable
+add word [bx], 20 ; Add 20 to variable
+popa ; Pop all registers from stack
+pop bp ; Pop bp from stack
+ret 2 ; Return to mainLoop
 
 ;=====================================
 mainLoop:
 
 call moveBird
+push pipesY ; y Cordinate address of pipe
 push pipesX; x Cordinate address of pipe    
 call movePipe
+push pipesY+2 ; y Cordinate address of pipe
 push pipesX+2 ; x Cordinate address of pipe
 call movePipe
 
