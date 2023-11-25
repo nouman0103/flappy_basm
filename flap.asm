@@ -8,8 +8,8 @@ bird2: db 12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12
 ground: db 0xEE,48h,31h,31h,31h,31h,31h,79h,2Bh,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h
 pipe: db 0xEE,0xEE,60h,49h,0xEE,0Ah,0xEE,0Ah,2Fh,60h,60h,60h,60h,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,0xEE,2Fh,2Fh,0xEE,2Fh,02h,02h,79h,79h,0xBF,0xEE,0xEE
 birdy: dw 30
-pipesX: dw 200
-pipesY: dw 50
+pipesX: dw 200,  300
+pipesY: dw 50 ,   20
 boolDrawBottomPipe: dw 0
 intBottomPipeStart: dw 0
 intPipeEndX: dw 0
@@ -257,9 +257,12 @@ ret 4
 
 ;=====================================
 movePipe:
+push bp
+mov bp, sp
 pusha
-dec word [pipesX]
-mov cx, [pipesX] ; x Cordinate
+mov bx, [bp+4] ; Ref to Address of pipesX
+dec word [bx] ; Decrement x Cordinate
+mov cx, [bx] ; x Cordinate
 add cx,41 ; Last x Cordinate + 41
 mov dx,0 ; y Cordinate
 mov al,35h
@@ -273,11 +276,12 @@ jb drawLastColumnSky
 sub cx,41 ; Last x Cordinate
 cmp cx,0
 jne endMovePipe
-mov word [pipesX], 320
+mov word [bx], 320
 
 endMovePipe:
 popa
-ret
+pop bp
+ret 2
 ;=====================================
 
 defCheckCollisions:
@@ -308,10 +312,18 @@ pop bp
 ret
 
 ;=====================================
+;generateRandomNumber:
+;pusha
+
+;=====================================
 mainLoop:
 
 call moveBird
+push pipesX; x Cordinate address of pipe    
 call movePipe
+push pipesX+2 ; x Cordinate address of pipe
+call movePipe
+
 call defCheckCollisions
 push word [birdy]
 call defDrawBird
@@ -319,6 +331,10 @@ call defDrawBird
 push word [pipesY] ; x Cordinate of pipe
 push word [pipesX] ; y Cordinate of pipe
 call defDrawPipe
+push word [pipesY+2] ; x Cordinate of pipe
+push word [pipesX+2] ; y Cordinate of pipe
+call defDrawPipe
+
 
 ;call defSleep
 jmp mainLoop
