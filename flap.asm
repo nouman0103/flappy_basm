@@ -7,6 +7,7 @@ bird2: db 12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12h,12
 
 ground: db 0xEE,48h,31h,31h,31h,31h,31h,79h,2Bh,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h
 pipe: db 0xEE,0xEE,60h,49h,0xEE,0Ah,0xEE,0Ah,2Fh,60h,60h,60h,60h,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,0xEE,2Fh,2Fh,0xEE,2Fh,02h,02h,79h,79h,0xBF,0xEE,0xEE
+scoreBoard: db 43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,69h,69h,69h,43h,36h,36h,69h,69h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,2Bh,2Bh,2Bh,43h,36h,36h,2Bh,2Bh,43h,36h,36h,2Bh,36h,36h,43h,36h,36h,2Bh,36h,69h,43h,36h,36h,2Bh,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,36h,36h,2Bh,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,69h,69h,69h,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,2Bh,2Bh,2Bh,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,2Bh,36h,36h,43h,36h,36h,2Bh,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,43h,36h,36h,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,69h,69h,69h,69h,69h,43h,69h,69h,69h,69h,43h,69h,69h,69h,69h,69h,43h,69h,69h,43h,69h,69h,43h,69h,69h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,2Bh,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,43h,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh
 birdy: dw 30
 pipesX: dw 150,  300
 pipesY: dw 50 ,   20
@@ -108,10 +109,11 @@ inc cx ; increment count of values
 jmp checkCount
 print3:
 mov bh, 0
+mov bl, 0x09
 nextpos:
 mov ah, 2
-mov dh, 20
-mov dl, 13
+mov dh, 22
+mov dl, 21
 sub dl, cl
 push cx
 mov cx, 1
@@ -253,7 +255,32 @@ endMoveBird:
 popa ; Pop all registers from stack
 ret ; Return to mainLoop
 ;=====================================
+defDrawScoreBoard:
+push bp
+mov bp, sp
+pusha
 
+mov cx, [bp+8] ; x Cordinate
+mov dx, [bp+10] ; y Cordinate
+mov ah, 0ch ; Function
+mov bx, scoreBoard ; Point bx to scoreBoard
+
+drawScoreBoard:
+mov al, [bx] ; Get pixel color
+int 10h ; Draw pixel
+inc cx ; x Cordinate + 1
+inc bx ; point bx to next pixel
+cmp cx, [bp+6]
+jb drawScoreBoard
+inc dx ; y Cordinate + 1
+mov cx, [bp+8]
+cmp dx, [bp+4]
+jb drawScoreBoard
+
+popa
+pop bp
+ret 8
+;=====================================
 defDrawPipe:
 push bp
 mov bp, sp
@@ -596,6 +623,13 @@ mov al, 13h
 int 10h
 
 call drawBackground
+push 171 ; y Cordinate
+push 110 ; x Cordinate
+push 110+61 ; x Cordinate + width
+push 171+18 ; y Cordinate + height
+
+call defDrawScoreBoard
+call defCollided
 jmp mainLoop
 
 mov ax, 0x4c00
