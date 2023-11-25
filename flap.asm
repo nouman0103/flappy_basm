@@ -269,22 +269,29 @@ mov bx, [bp+4] ; Ref to Address of pipesX
 dec word [bx] ; Decrement x Cordinate
 mov cx, [bx] ; x Cordinate
 add cx,41 ; Last x Cordinate + 41
+cmp cx, 320
+jge adjustX
+jmp continueDrawing ; Continue drawing pipe
+adjustX:
+sub word cx, 320
+continueDrawing:
 mov dx,0 ; y Cordinate
 mov al,35h
 mov ah,0ch
-push bx
-mov bx, [bp+6]
+mov si,[bp+6] ; Ref to Address of pipesY
 drawLastColumnSky:
 int 10h
-;cmp dx, [bx] ; y Cordinate
-;jne continueDrawing
-;add dx, 50
-;jmp drawLastColumnSky
-continueDrawing:
+cmp dx, [si] ; y Cordinate
+jne continueDrawingSky
+cmp cx,41 ; x Cordinate
+jb continueDrawingSky
+add dx, 50
+jmp drawLastColumnSky
+continueDrawingSky:
 inc dx
 cmp dx,150
 jb drawLastColumnSky
-pop bx
+
 ;Check if pipe is out of screen
 sub cx,41 ; Last x Cordinate
 cmp cx,0
@@ -401,6 +408,9 @@ ret 2 ; Return to mainLoop
 mainLoop:
 
 call moveBird
+call defCheckCollisions
+push word [birdy]
+call defDrawBird
 push pipesY ; y Cordinate address of pipe
 push pipesX; x Cordinate address of pipe    
 call movePipe
@@ -408,9 +418,6 @@ push pipesY+2 ; y Cordinate address of pipe
 push pipesX+2 ; x Cordinate address of pipe
 call movePipe
 
-call defCheckCollisions
-push word [birdy]
-call defDrawBird
 
 push word [pipesY] ; x Cordinate of pipe
 push word [pipesX] ; y Cordinate of pipe
