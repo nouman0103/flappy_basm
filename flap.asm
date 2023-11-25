@@ -27,7 +27,7 @@ birdCounter: dw 30
 boolCollided: dw 0
 score: dw 0
 scoreCounter: dw 0
-sound: dw 0
+sound: dw 0x149
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
@@ -212,6 +212,7 @@ mov word [positionUpCounter], 0
 call setFallDown
 
 moveBirdUp:
+call playSound
 cmp word [velocityUp], 6
 je moveBirdDown
 cmp word [positionUpCounter], 2
@@ -581,6 +582,10 @@ inc ax
 push ax
 		Call ChibiSound
 pop ax
+cmp ax,0x179
+jb endPlaySound
+mov ax, 0x149
+endPlaySound:
 mov [sound], ax
 ret
 ;=====================================
@@ -612,7 +617,7 @@ push 0
 call defDrawPipe
 
 call printnum
-call playSound
+
 ;call defSleep
 jmp mainLoop
 
