@@ -24,6 +24,8 @@ velocityDownCounter: dw 7
 positionDownCounter: dw 5
 birdCounter: dw 30
 boolCollided: dw 0
+score: dw 0
+scoreCounter: dw 0
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
@@ -75,7 +77,55 @@ jb groundLoop
 popa
 ret
 ;=====================================
+printnum:
+push bp
+mov bp, sp
+pusha 
 
+cmp word [scoreCounter], 0
+jne skipPrint
+mov word [scoreCounter], 30
+inc word [score]
+
+mov ax, [score] ; load number in ax
+mov bx, 10 ; use base 10 for division
+mov cx, 0 ; initialize count of digits
+nextdigit:
+mov dx, 0 ; zero upper half of dividend
+div bx ; divide by 10
+add dl, 0x30 ; convert digit into ascii value
+push dx ; save ascii value on stack
+inc cx ; increment count of values
+cmp ax, 0 ; is the quotient zero
+jnz nextdigit ; if no divide it again
+
+checkCount:
+cmp cx, 3 ; is the count 3
+jae print3 ; if yes print 3 digits
+push '0' ; if no print leading zero
+inc cx ; increment count of values
+jmp checkCount
+print3:
+mov bh, 0
+nextpos:
+mov ah, 2
+mov dh, 20
+mov dl, 13
+sub dl, cl
+push cx
+mov cx, 1
+int 10h
+pop cx
+pop ax
+mov ah, 0Ah
+int 10h
+loop nextpos ; repeat for all digits on stack
+skipPrint:
+dec word [scoreCounter]
+popa
+pop bp
+ret
+;=====================================
 ;Draw Flappy bird, Input: 1 dw element, y Cordinate
 defDrawBird:
 push bp
@@ -446,6 +496,8 @@ push 0
 push word [leftOverPipeY]
 push 0
 call defDrawPipe
+
+call printnum
 
 ;call defSleep
 jmp mainLoop
