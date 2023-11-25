@@ -213,10 +213,11 @@ mov dx, 0 ; y Cordinate
 mov ah, 0ch ; Function
 mov bx, [bp+6]
 mov word [intBottomPipeStart], bx ; Save y Cordinate
-add word [intBottomPipeStart], 40
+add word [intBottomPipeStart], 50
 mov word [boolDrawBottomPipe], 0 ; boolDrawBottomPipe = 0
 mov word [intPipeEndX], cx
 add word [intPipeEndX], 40
+
 
 mov bx, pipe
 
@@ -231,14 +232,18 @@ jmp colorSelected
 drawBorder:
 mov al, 0xEE
 colorSelected:
-
+cmp cx, 320
+ja skipPipe
+cmp cx , 0
+jb skipPipe
 int 10h ; Draw pixel
+skipPipe:
 inc dx ; x Cordinate + 1
 cmp dx, [bp+6]
 jbe drawTopPipe
 cmp dx, [intBottomPipeStart]
 ja notSkip
-add dx, 39
+add dx, 49
 notSkip:
 cmp dx, 150
 jb drawTopPipe
