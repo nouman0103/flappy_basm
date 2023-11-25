@@ -499,95 +499,34 @@ pop bp ; Pop bp from stack
 ret 2 ; Return to mainLoop
 
 ;=====================================
-ChibiSound:   ;NVTTTTTT	Noise Volume Tone (N=1 highest pitch)
-	
-	cmp al,0
-	je ChibiSound_Silent
-	
-	push ax
-		mov ah,al
-				;   CCAAMMMS  C=Counter select,  A=counter Access
-							;M=counter Mode, S=counter Style
-		mov al, 10110110b   ;M=3 - square wave, AA=3 Write LH Bytes to 42h
-							;C=2 - Counter 2 select
-		out 43h, al     
-		
-	
-		and ah,00111111b	;Pitch bits
-		
-		xor al,al
-		mov cl,2			;shift pitch
-		ror ax,cl
-				
-		out 42h, al       	;L Byte - 0042 - counter 2
-		mov al, ah  		;Send High Byte
-		out 42h, al 		;H Byte - 0042 - counter 2
-		
-		
-		in al, 61h      	;Get status of KB controller port B 
-			;  R---PPST 	 R=Reset P= parity checks S=Speaker 
-							;T=speaker Timer 
-		or al, 00000011b	;Turn on the speaker   
-		out 61h, al       	;Update KB controller port B
-		and al,11111101b
-		mov ah,al			;Store 'Off' setting for later
-	pop bx
-	
-	mov cx,4000h			;Quiet tone length
-	
-	test bl,10000000b
-	jnz ChibiSound_DoNoise	;Turn on noise?
-	
-	test bl,01000000b
-	jnz ChibiSound_DoLoud
-	
-ChibiSound_Quiet:		
-	
-	loop ChibiSound_Quiet	;Wait for quiet tone
-	jmp ChibiSound_Silent	;Turn off tone
-	
-ChibiSound_DoNoise:	
-	mov cx,2000h			;Noise lengyh (2000=loud 1000=quiet)
-		
-	test bl,01000000b		;Volume bit
-	
-	mov bx,0010000001101010b	;Noise pattern
-	
-	jnz ChibiSound_Noise
-	ror cx,1				;Quiet noise (1000h)
-	
-ChibiSound_Noise:
-	ror bx,1				;Cycle noise pattern
-	mov al,bl
-	xor al,cl				;add in CH/CL
-	add al,ch
-	and al,00000010b		;Get one bit
-	or al,ah				;Turn into a sound on/off toggle
-	out 61h, al 
-	loop ChibiSound_Noise
-	
-ChibiSound_Silent:	
-	in al, 61h 			;Get status of KB controller port B 
-		 ;  R---PPST 	 R=Reset P= parity checks S=Speaker 
-							;T=speaker Timer 
-	and al, 11111100b  	;Turn off the speaker 
-	out 61h, al       	;Update KB controller port B
-ChibiSound_DoLoud:
-	ret
+
 	
 ;=====================================
 playSound:
-mov ax, [sound]
-inc ax
-push ax
-		Call ChibiSound
-pop ax
-cmp ax,0x179
-jb endPlaySound
-mov ax, 0x149
-endPlaySound:
-mov [sound], ax
+pusha
+mov bl, 10h
+call sb_write_dsp
+
+; send byte audio sample
+mov si, [sound_index]
+mov bl, [sound_data + si]
+call sb_write_dsp
+cmp word [sound_index], 51529	
+jne skipSound
+mov word [sound_index], 0
+skipSound:
+popa
 ret
+;====================================
+sb_write_dsp:
+			mov dx, 22ch
+		.busy:
+			in al, dx
+			test al, 10000000b
+			jnz .busy
+			mov al, bl
+			out dx, al
+			ret
 ;=====================================
 mainLoop:
 
@@ -617,7 +556,7 @@ push 0
 call defDrawPipe
 
 call printnum
-
+call playSound
 ;call defSleep
 jmp mainLoop
 
@@ -638,3 +577,9 @@ jmp mainLoop
 
 mov ax, 0x4c00
 int 21h
+;================================================
+section .data
+	sound_index dw 0
+	sound_data:
+	incbin "kingsv.wav" ;
+;================================================
