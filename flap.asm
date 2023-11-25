@@ -10,6 +10,8 @@ pipe: db 0xEE,0xEE,60h,49h,0xEE,0Ah,0xEE,0Ah,2Fh,60h,60h,60h,60h,2Fh,2Fh,2Fh,2Fh
 birdy: dw 30
 pipesX: dw 200,  300
 pipesY: dw 50 ,   20
+leftOverPipeWidth: dw 0
+leftOverPipeY: dw 0
 boolDrawBottomPipe: dw 0
 intBottomPipeStart: dw 0
 intPipeEndX: dw 0
@@ -218,9 +220,19 @@ mov word [boolDrawBottomPipe], 0 ; boolDrawBottomPipe = 0
 mov word [intPipeEndX], cx
 add word [intPipeEndX], 40
 
-
 mov bx, pipe
 
+cmp word [bp+8], 1
+je drawTopPipe
+cmp word [leftOverPipeWidth], 0
+jbe endDrawPipe
+mov cx, [leftOverPipeWidth]
+mov word [intPipeEndX], cx
+mov cx, 40
+sub cx, [leftOverPipeWidth]
+add bx, cx
+mov cx, 0
+dec word [leftOverPipeWidth]
 
 drawTopPipe:
 cmp dx, [bp+6] ; Check if y Cordinate is equal to y Cordinate + 150
@@ -233,9 +245,9 @@ drawBorder:
 mov al, 0xEE
 colorSelected:
 cmp cx, 320
-ja skipPipe
+jae endDrawPipe
 cmp cx , 0
-jb skipPipe
+jb endDrawPipe
 int 10h ; Draw pixel
 skipPipe:
 inc dx ; x Cordinate + 1
@@ -258,7 +270,7 @@ jb drawTopPipe
 endDrawPipe:
 popa 
 pop bp
-ret 4
+ret 6
 
 ;=====================================
 movePipe:
@@ -296,6 +308,9 @@ jb drawLastColumnSky
 sub cx,41 ; Last x Cordinate
 cmp cx,0
 jne endMovePipe
+mov word [leftOverPipeWidth], 40
+mov cx, [si]
+mov word [leftOverPipeY], cx
 mov word [bx], 320
 push word [bp+6] ; Ref to Address of pipesY
 call generateRandomNumber
@@ -418,14 +433,19 @@ push pipesY+2 ; y Cordinate address of pipe
 push pipesX+2 ; x Cordinate address of pipe
 call movePipe
 
-
+push 1
 push word [pipesY] ; x Cordinate of pipe
 push word [pipesX] ; y Cordinate of pipe
 call defDrawPipe
+push 1
 push word [pipesY+2] ; x Cordinate of pipe
 push word [pipesX+2] ; y Cordinate of pipe
 call defDrawPipe
 
+push 0
+push word [leftOverPipeY]
+push 0
+call defDrawPipe
 
 ;call defSleep
 jmp mainLoop
