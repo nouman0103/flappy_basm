@@ -634,7 +634,6 @@ push 110+61 ; x Cordinate + width
 push 171+18 ; y Cordinate + height
 
 call defDrawScoreBoard
-call defCollided
 jmp mainLoop
 
 mov ax, 0x4c00
