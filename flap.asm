@@ -21,7 +21,7 @@ velocityDown: dw 5
 velocityDownCounter: dw 7
 positionDownCounter: dw 5
 birdCounter: dw 30
-
+boolCollided: dw 0
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
@@ -272,11 +272,19 @@ add cx,41 ; Last x Cordinate + 41
 mov dx,0 ; y Cordinate
 mov al,35h
 mov ah,0ch
+push bx
+mov bx, [bp+6]
 drawLastColumnSky:
 int 10h
+;cmp dx, [bx] ; y Cordinate
+;jne continueDrawing
+;add dx, 50
+;jmp drawLastColumnSky
+continueDrawing:
 inc dx
 cmp dx,150
 jb drawLastColumnSky
+pop bx
 ;Check if pipe is out of screen
 sub cx,41 ; Last x Cordinate
 cmp cx,0
@@ -289,6 +297,54 @@ endMovePipe:
 popa
 pop bp
 ret 2
+;=====================================
+defCollided:
+push ax
+mov word [boolCollided], 1
+mov ah,00
+int 16h
+pop ax
+ret
+
+;=====================================
+defCheckPipeCollisions:
+push bp
+mov bp, sp
+pusha
+
+
+; check 1, pipeX > 40 && pipeX < 65
+cmp word [bp+6], 40
+jb checkx2
+cmp word [bp+6], 65
+ja checkx2
+jmp checkY
+checkx2:
+; check 2, pipeX < 40
+cmp word [bp+6], 40
+ja clear
+jmp checkY
+
+checkY:
+; check Y, pipeY < birdY && pipeY + 50 > birdY
+
+mov dx, [bp+4]
+mov bx, [birdy]
+cmp dx, bx
+ja collided
+add dx, 50
+add bx, 15
+cmp dx, bx
+ja clear
+
+collided:
+call defCollided
+
+
+clear:
+popa
+pop bp
+ret 4
 ;=====================================
 
 defCheckCollisions:
@@ -308,11 +364,16 @@ topCollisionClear:
 add dx, 15
 cmp dx, 150
 jb groundCollisionClear
-mov ah,00
-int 16h
-
+call defCollided
 groundCollisionClear:
 
+push word [pipesX]
+push word [pipesY]
+call defCheckPipeCollisions
+
+push word [pipesX+2]
+push word [pipesY+2]
+call defCheckPipeCollisions
 
 popa
 pop bp
