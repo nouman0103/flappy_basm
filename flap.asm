@@ -27,7 +27,7 @@ birdCounter: dw 30
 boolCollided: dw 0
 score: dw 0
 scoreCounter: dw 0
-sound: dw 0x149
+sound: dw 0x200
 isMenu: dw 1
 boolGameOver: dw 0
 StartText: db "Press spacebar to start"
@@ -326,6 +326,7 @@ mov ah,00h ; Get keyboard input
 int 16h ; Get keyboard input
 cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
 jne moveBirdUp ; If keyboard input is not SPACE_KEY, jump to moveBirddown
+push word [sound]
 call playSound
 mov word [velocityUp], 0
 mov word [positionUpCounter], 0
@@ -535,6 +536,7 @@ ret 2
 ;=====================================
 defCollided:
 push ax
+push word [sound]
 call playSound
 mov word [boolGameOver], 1
 call defDrawGameOver
@@ -745,12 +747,18 @@ ChibiSound_DoLoud:
 	ret
 	
 ;=====================================
+
 playSound:
-push word [sound] 
-		Call ChibiSound
+push bp
+mov bp, sp
+pusha
+push word [bp+4]
+Call ChibiSound
 pop ax
-endPlaySound:
-ret
+popa
+pop bp
+ret 2
+
 ;=====================================
 mainLoop:
 
