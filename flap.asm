@@ -547,8 +547,8 @@ mov word [isMenu], 1
 mov word [score], 0
 mov word [scoreCounter], 0
 mov word [birdy], 30
-mov word [pipesX], 200
-mov word [pipesX+2], 319
+mov word [pipesX], 319
+mov word [pipesX+2], 500
 mov word [pipesY], 50
 mov word [pipesY+2], 20
 mov word [leftOverPipeWidth], 0
