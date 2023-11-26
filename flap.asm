@@ -9,7 +9,7 @@ ground: db 0xEE,48h,31h,31h,31h,31h,31h,79h,2Bh,43h,43h,43h,43h,43h,43h,43h,43h,
 pipe: db 0xEE,0xEE,60h,49h,0xEE,0Ah,0xEE,0Ah,2Fh,60h,60h,60h,60h,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,0xEE,2Fh,2Fh,0xEE,2Fh,02h,02h,79h,79h,0xBF,0xEE,0xEE
 scoreBoard: db 43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,69h,69h,69h,43h,36h,36h,69h,69h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,2Bh,2Bh,2Bh,43h,36h,36h,2Bh,2Bh,43h,36h,36h,2Bh,36h,36h,43h,36h,36h,2Bh,36h,69h,43h,36h,36h,2Bh,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,36h,36h,2Bh,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,69h,69h,69h,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,2Bh,2Bh,2Bh,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,2Bh,36h,36h,43h,36h,36h,2Bh,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,43h,36h,36h,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,69h,69h,69h,69h,69h,43h,69h,69h,69h,69h,43h,69h,69h,69h,69h,69h,43h,69h,69h,43h,69h,69h,43h,69h,69h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,2Bh,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,43h,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh
 birdy: dw 30
-pipesX: dw 150,  300
+pipesX: dw 200,  350
 pipesY: dw 50 ,   20
 leftOverPipeWidth: dw 0
 leftOverPipeY: dw 0
@@ -28,17 +28,135 @@ boolCollided: dw 0
 score: dw 0
 scoreCounter: dw 0
 sound: dw 0x149
+isMenu: dw 1
+boolGameOver: dw 0
+StartText: db "Press spacebar to start"
+ExitText: db "Press Q to exit"
+GameOverText: db "Game Over"
+GameRestartText: db "Press any key to restart"
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
 pusha
 mov cx, 0; keep it 0
-mov dx, 0x1388 ; 5000 microseconds
+mov dx, 0x3A98 ; 5000 microseconds
 mov ah, 86h ; function 86h
 int 15h ; call interrupt 15h
 popa
 ret
 
+;====================================
+defDrawMenuTexts:
+push bp
+mov bp, sp
+pusha
+
+mov al, 1
+mov bh, 0
+mov bl, 0x05
+mov cx, 23 ; calculate message size.
+mov dl, 10
+mov dh, 10
+push cs
+pop es
+mov bp, StartText
+mov ah, 13h
+int 10h
+
+mov dl, 13
+mov dh, 12
+mov cx, 15 ; calculate message size.
+mov bp, ExitText
+int 10h
+
+push 35h ; background color
+push 250 ; width
+push 80 ; y Cordinate
+push 40 ; x Cordinate
+call defSetTextBackground
+push 35h ; background color
+push 250 ; width
+push 96 ; y Cordinate
+push 50 ; x Cordinate
+call defSetTextBackground
+
+
+popa
+pop bp
+ret
+;====================================
+defSetTextBackground:
+push bp
+mov bp, sp
+pusha
+
+mov cx, [bp+4]; x Cordinate
+mov dx, [bp+6]; y Cordinate
+mov bx, cx
+add bx, [bp+8]; x Cordinate + width
+
+checkAndReplace:
+mov ah, 0Dh
+int 10h
+cmp al, 00h
+jne skipReplace
+mov ah, 0Ch
+mov al, [bp+10]
+int 10h
+skipReplace:
+inc cx
+cmp cx, bx
+jb checkAndReplace
+inc dx
+mov cx, [bp+4]
+mov ax, [bp+6]
+add ax, 8
+cmp dx, ax
+jb checkAndReplace
+
+popa
+pop bp
+ret 8
+;====================================
+defDrawGameOver:
+push bp
+mov bp, sp
+pusha
+
+mov al, 1
+mov bh, 0
+mov bl, 0x28
+mov cx, 9 ; calculate message size.
+mov dl, 15
+mov dh, 20
+push cs
+pop es
+mov bp, GameOverText
+mov ah, 13h
+int 10h
+
+push 43h ; background color
+push 250 ; width
+push 160 ; y Cordinate
+push 120 ; x Cordinate
+call defSetTextBackground
+
+
+mov cx, 24 ; calculate message size.
+mov dl, 8
+mov dh, 24
+mov bp, GameRestartText
+int 10h
+
+push 43h ; background color
+push 250 ; width
+push 192 ; y Cordinate
+push 50 ; x Cordinate
+call defSetTextBackground
+
+popa
+pop bp
+ret
 ;====================================
 defDrawSky: ; Draw a entire row of sky
 mov al,35h
@@ -87,6 +205,8 @@ pusha
 cmp word [scoreCounter], 0
 jne skipPrint
 mov word [scoreCounter], 30
+cmp word [isMenu], 1
+je skipPrint
 inc word [score]
 
 mov ax, [score] ; load number in ax
@@ -109,11 +229,11 @@ inc cx ; increment count of values
 jmp checkCount
 print3:
 mov bh, 0
-mov bl, 0x09
+mov bl, 0x36
 nextpos:
 mov ah, 2
 mov dh, 22
-mov dl, 21
+mov dl, 23
 sub dl, cl
 push cx
 mov cx, 1
@@ -211,8 +331,17 @@ mov word [positionUpCounter], 0
 
 call setFallDown
 
+cmp word [isMenu], 1
+jne moveBirdUp
+call drawBackground
+call defDrawScoreBoard
+mov word [isMenu], 0
+
+
 moveBirdUp:
-call playSound
+cmp word [isMenu], 1
+je endMoveBird
+
 cmp word [velocityUp], 6
 je moveBirdDown
 cmp word [positionUpCounter], 2
@@ -261,8 +390,8 @@ push bp
 mov bp, sp
 pusha
 
-mov cx, [bp+8] ; x Cordinate
-mov dx, [bp+10] ; y Cordinate
+mov cx, 126 ; x Cordinate
+mov dx, 171 ; y Cordinate
 mov ah, 0ch ; Function
 mov bx, scoreBoard ; Point bx to scoreBoard
 
@@ -271,16 +400,16 @@ mov al, [bx] ; Get pixel color
 int 10h ; Draw pixel
 inc cx ; x Cordinate + 1
 inc bx ; point bx to next pixel
-cmp cx, [bp+6]
+cmp cx, 187 ; x cordinate + 61
 jb drawScoreBoard
 inc dx ; y Cordinate + 1
-mov cx, [bp+8]
-cmp dx, [bp+4]
+mov cx, 126 ; x Cordinate
+cmp dx, 189 ; y Cordinate + 18
 jb drawScoreBoard
 
 popa
 pop bp
-ret 8
+ret
 ;=====================================
 defDrawPipe:
 push bp
@@ -294,7 +423,7 @@ mov dx, 0 ; y Cordinate
 mov ah, 0ch ; Function
 mov bx, [bp+6]
 mov word [intBottomPipeStart], bx ; Save y Cordinate
-add word [intBottomPipeStart], 50
+add word [intBottomPipeStart], 55
 mov word [boolDrawBottomPipe], 0 ; boolDrawBottomPipe = 0
 mov word [intPipeEndX], cx
 add word [intPipeEndX], 40
@@ -334,7 +463,7 @@ cmp dx, [bp+6]
 jbe drawTopPipe
 cmp dx, [intBottomPipeStart]
 ja notSkip
-add dx, 49
+add dx, 54
 notSkip:
 cmp dx, 150
 jb drawTopPipe
@@ -376,7 +505,7 @@ cmp dx, [si] ; y Cordinate
 jne continueDrawingSky
 cmp cx,41 ; x Cordinate
 jb continueDrawingSky
-add dx, 50
+add dx, 55
 jmp drawLastColumnSky
 continueDrawingSky:
 inc dx
@@ -401,9 +530,40 @@ ret 2
 ;=====================================
 defCollided:
 push ax
-mov word [boolCollided], 1
+mov word [boolGameOver], 1
+call defDrawGameOver
 mov ah,00
 int 16h
+
+mov word [isMenu], 1
+mov word [score], 0
+mov word [scoreCounter], 0
+mov word [birdy], 30
+mov word [pipesX], 200
+mov word [pipesX+2], 350
+mov word [pipesY], 50
+mov word [pipesY+2], 20
+mov word [leftOverPipeWidth], 0
+mov word [leftOverPipeY], 0
+mov word [boolDrawBottomPipe], 0
+mov word [intBottomPipeStart], 0
+mov word [intPipeEndX], 0
+mov word [velocityUp], 6
+mov word [velocityUpCounter], 0
+mov word [positionUpCounter], 2
+mov word [velocityDown], 5
+mov word [velocityDownCounter], 7
+mov word [positionDownCounter], 5
+mov word [birdCounter], 30
+mov word [boolCollided], 0
+mov word [score], 0
+mov word [scoreCounter], 0
+mov word [boolGameOver], 0
+
+call drawBackground
+call defDrawScoreBoard
+call defDrawMenuTexts
+
 pop ax
 ret
 
@@ -427,13 +587,13 @@ ja clear
 jmp checkY
 
 checkY:
-; check Y, pipeY < birdY && pipeY + 50 > birdY
+; check Y, pipeY < birdY && pipeY + 55 > birdY
 
 mov dx, [bp+4]
 mov bx, [birdy]
 cmp dx, bx
 ja collided
-add dx, 50
+add dx, 55
 add bx, 15
 cmp dx, bx
 ja clear
@@ -595,6 +755,10 @@ call moveBird
 call defCheckCollisions
 push word [birdy]
 call defDrawBird
+
+cmp word [isMenu], 1
+je skipCauseMenu
+
 push pipesY ; y Cordinate address of pipe
 push pipesX; x Cordinate address of pipe    
 call movePipe
@@ -616,9 +780,13 @@ push word [leftOverPipeY]
 push 0
 call defDrawPipe
 
+skipCauseMenu:
+
 call printnum
 
-;call defSleep
+cmp word [isMenu], 1
+jne mainLoop
+call defSleep
 jmp mainLoop
 
 start:
@@ -628,12 +796,8 @@ mov al, 13h
 int 10h
 
 call drawBackground
-push 171 ; y Cordinate
-push 110 ; x Cordinate
-push 110+61 ; x Cordinate + width
-push 171+18 ; y Cordinate + height
-
 call defDrawScoreBoard
+call defDrawMenuTexts
 jmp mainLoop
 
 mov ax, 0x4c00
