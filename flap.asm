@@ -9,7 +9,7 @@ ground: db 0xEE,48h,31h,31h,31h,31h,31h,79h,2Bh,43h,43h,43h,43h,43h,43h,43h,43h,
 pipe: db 0xEE,0xEE,60h,49h,0xEE,0Ah,0xEE,0Ah,2Fh,60h,60h,60h,60h,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,0xEE,2Fh,2Fh,0xEE,2Fh,02h,02h,79h,79h,0xBF,0xEE,0xEE
 scoreBoard: db 43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,69h,69h,69h,43h,36h,36h,69h,69h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,2Bh,2Bh,2Bh,43h,36h,36h,2Bh,2Bh,43h,36h,36h,2Bh,36h,36h,43h,36h,36h,2Bh,36h,69h,43h,36h,36h,2Bh,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,36h,36h,2Bh,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,69h,69h,69h,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,2Bh,2Bh,2Bh,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,2Bh,36h,36h,43h,36h,36h,2Bh,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,43h,36h,36h,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,69h,69h,69h,69h,69h,43h,69h,69h,69h,69h,43h,69h,69h,69h,69h,69h,43h,69h,69h,43h,69h,69h,43h,69h,69h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,2Bh,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,43h,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh
 birdy: dw 30
-pipesX: dw 200,  350
+pipesX: dw 200,  319
 pipesY: dw 50 ,   20
 leftOverPipeWidth: dw 0
 leftOverPipeY: dw 0
@@ -33,7 +33,8 @@ boolGameOver: dw 0
 StartText: db "Press spacebar to start"
 ExitText: db "Press Q to exit"
 GameOverText: db "Game Over"
-GameRestartText: db "Press any key to restart"
+GameRestartText: db "Press R to restart"
+boolFirstPipe: dw 0
 SPACE_KEY equ 20h
 ;====================================
 defSleep:
@@ -142,7 +143,7 @@ push 120 ; x Cordinate
 call defSetTextBackground
 
 
-mov cx, 24 ; calculate message size.
+mov cx, 18 ; calculate message size.
 mov dl, 8
 mov dh, 24
 mov bp, GameRestartText
@@ -325,7 +326,7 @@ mov ah,00h ; Get keyboard input
 int 16h ; Get keyboard input
 cmp al,SPACE_KEY ; Check if keyboard input is SPACE_KEY
 jne moveBirdUp ; If keyboard input is not SPACE_KEY, jump to moveBirddown
-
+call playSound
 mov word [velocityUp], 0
 mov word [positionUpCounter], 0
 
@@ -516,6 +517,7 @@ jb drawLastColumnSky
 sub cx,41 ; Last x Cordinate
 cmp cx,0
 jne endMovePipe
+mov word [boolFirstPipe], 1
 mov word [leftOverPipeWidth], 40
 mov cx, [si]
 mov word [leftOverPipeY], cx
@@ -530,17 +532,20 @@ ret 2
 ;=====================================
 defCollided:
 push ax
+call playSound
 mov word [boolGameOver], 1
 call defDrawGameOver
+waitForKey:
 mov ah,00
 int 16h
-
+cmp al, 'r'
+jne waitForKey
 mov word [isMenu], 1
 mov word [score], 0
 mov word [scoreCounter], 0
 mov word [birdy], 30
 mov word [pipesX], 200
-mov word [pipesX+2], 350
+mov word [pipesX+2], 319
 mov word [pipesY], 50
 mov word [pipesY+2], 20
 mov word [leftOverPipeWidth], 0
@@ -559,6 +564,7 @@ mov word [boolCollided], 0
 mov word [score], 0
 mov word [scoreCounter], 0
 mov word [boolGameOver], 0
+mov word [boolFirstPipe], 0
 
 call drawBackground
 call defDrawScoreBoard
@@ -737,16 +743,10 @@ ChibiSound_DoLoud:
 	
 ;=====================================
 playSound:
-mov ax, [sound]
-inc ax
-push ax
+push word [sound] 
 		Call ChibiSound
 pop ax
-cmp ax,0x179
-jb endPlaySound
-mov ax, 0x149
 endPlaySound:
-mov [sound], ax
 ret
 ;=====================================
 mainLoop:
@@ -774,7 +774,8 @@ push 1
 push word [pipesY+2] ; x Cordinate of pipe
 push word [pipesX+2] ; y Cordinate of pipe
 call defDrawPipe
-
+cmp word [boolFirstPipe], 1
+jne skipCauseMenu
 push 0
 push word [leftOverPipeY]
 push 0
