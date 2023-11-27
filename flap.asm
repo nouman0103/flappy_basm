@@ -9,7 +9,7 @@ ground: db 0xEE,48h,31h,31h,31h,31h,31h,79h,2Bh,43h,43h,43h,43h,43h,43h,43h,43h,
 pipe: db 0xEE,0xEE,60h,49h,0xEE,0Ah,0xEE,0Ah,2Fh,60h,60h,60h,60h,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,2Fh,0xEE,2Fh,2Fh,0xEE,2Fh,02h,02h,79h,79h,0xBF,0xEE,0xEE
 scoreBoard: db 43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,69h,69h,69h,43h,36h,36h,69h,69h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,2Bh,2Bh,2Bh,43h,36h,36h,2Bh,2Bh,43h,36h,36h,2Bh,36h,36h,43h,36h,36h,2Bh,36h,69h,43h,36h,36h,2Bh,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,36h,36h,2Bh,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,69h,69h,69h,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,69h,36h,36h,43h,36h,36h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,2Bh,2Bh,2Bh,36h,36h,43h,36h,36h,43h,43h,43h,36h,36h,43h,36h,36h,43h,36h,36h,2Bh,36h,36h,43h,36h,36h,2Bh,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,36h,36h,36h,36h,36h,43h,36h,36h,36h,36h,43h,36h,36h,36h,36h,36h,43h,36h,36h,43h,36h,36h,43h,36h,36h,36h,36h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,69h,69h,69h,69h,69h,43h,69h,69h,69h,69h,43h,69h,69h,69h,69h,69h,43h,69h,69h,43h,69h,69h,43h,69h,69h,69h,69h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,2Bh,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,2Bh,43h,2Bh,2Bh,43h,2Bh,2Bh,43h,2Bh,2Bh,2Bh,2Bh,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,00h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,36h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,69h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,43h,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh,2Bh
 birdy: dw 30
-pipesX: dw 319,  500
+pipesX: dw 319,  459
 pipesY: dw 50 ,   20
 leftOverPipeWidth: dw 0
 leftOverPipeY: dw 0
@@ -35,7 +35,10 @@ ExitText: db "Press Q to exit"
 GameOverText: db "Game Over"
 GameRestartText: db "Press R to restart"
 boolFirstPipe: dw 0
+boolEndGame: dw 0
+boolAdjusted: dw 0
 SPACE_KEY equ 20h
+Q_Key equ 71h
 ;====================================
 defSleep:
 pusha
@@ -144,7 +147,7 @@ call defSetTextBackground
 
 
 mov cx, 18 ; calculate message size.
-mov dl, 8
+mov dl, 10
 mov dh, 24
 mov bp, GameRestartText
 int 10h
@@ -299,6 +302,8 @@ mov cx, 40 ; x Cordinate = 40
 cmp dx, [intBirdBottomY] ; Check if y Cordinate is equal to y Cordinate
 jb drawBird ; If y Cordinate is less than y Cordinate + 15, draw another pixel
 
+cmp dx, 150
+je skipBottomSky
 mov al,35h
 drawBottomSky:
 int 10h
@@ -306,6 +311,7 @@ inc cx
 cmp cx,65
 jb drawBottomSky
 
+skipBottomSky:
 popa 
 pop bp
 ret 2
@@ -383,6 +389,10 @@ dec word [positionDownCounter]
 
 
 endMoveBird:
+cmp al,Q_Key
+jne endMoveBirdSkip
+mov word [boolEndGame],1
+endMoveBirdSkip:
 
 popa ; Pop all registers from stack
 ret ; Return to mainLoop
@@ -491,11 +501,13 @@ mov bx, [bp+4] ; Ref to Address of pipesX
 dec word [bx] ; Decrement x Cordinate
 mov cx, [bx] ; x Cordinate
 add cx,41 ; Last x Cordinate + 41
+mov word [boolAdjusted], 0
 cmp cx, 320
 jge adjustX
 jmp continueDrawing ; Continue drawing pipe
 adjustX:
 sub word cx, 320
+mov word [boolAdjusted], 1
 continueDrawing:
 mov dx,0 ; y Cordinate
 mov al,35h
@@ -505,6 +517,11 @@ drawLastColumnSky:
 int 10h
 cmp dx, [si] ; y Cordinate
 jne continueDrawingSky
+cmp word [boolAdjusted], 0
+je notCheckForadjusted
+cmp cx,41 ; x Cordinate
+ja skipSkyColumn
+notCheckForadjusted:
 cmp cx,41 ; x Cordinate
 jb continueDrawingSky
 add dx, 55
@@ -514,6 +531,7 @@ inc dx
 cmp dx,150
 jb drawLastColumnSky
 
+skipSkyColumn:
 ;Check if pipe is out of screen
 sub cx,41 ; Last x Cordinate
 cmp cx,0
@@ -530,6 +548,7 @@ push word [bp+6] ; Ref to Address of pipesY
 call generateRandomNumber
 
 endMovePipe:
+
 popa
 pop bp
 ret 2
@@ -550,7 +569,7 @@ mov word [score], 0
 mov word [scoreCounter], 0
 mov word [birdy], 30
 mov word [pipesX], 319
-mov word [pipesX+2], 500
+mov word [pipesX+2], 459
 mov word [pipesY], 50
 mov word [pipesY+2], 20
 mov word [leftOverPipeWidth], 0
@@ -607,7 +626,7 @@ ja collided
 add dx, 55
 add bx, 15
 cmp dx, bx
-ja clear
+jae clear
 
 collided:
 call defCollided
@@ -635,7 +654,7 @@ mov word [birdy], 1
 topCollisionClear:
 add dx, 15
 cmp dx, 150
-jb groundCollisionClear
+jbe groundCollisionClear
 call defCollided
 groundCollisionClear:
 
@@ -761,7 +780,8 @@ ret 2
 
 ;=====================================
 mainLoop:
-
+cmp word [boolEndGame],1
+je endGame
 call moveBird
 call defCheckCollisions
 push word [birdy]
@@ -811,6 +831,6 @@ call drawBackground
 call defDrawScoreBoard
 call defDrawMenuTexts
 jmp mainLoop
-
+endGame:
 mov ax, 0x4c00
 int 21h
