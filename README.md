@@ -1,3 +1,11 @@
 # flappy_basm
 
-![image](https://github.com/nouman0103/flappy_basm/assets/40216575/a4b515c8-a188-4404-a4a9-8c86ca856601)
+An immersive flappy bird, developed purely in Assembly 8086. 
+
+Project developed By:
+22L-6937 - Main Abdullah
+22L-6671 - M. Nouman Iqbal
+
+Submission To:
+Salman Shoaib( salman.shoaib@lhr.nu.edu.pk )
+
